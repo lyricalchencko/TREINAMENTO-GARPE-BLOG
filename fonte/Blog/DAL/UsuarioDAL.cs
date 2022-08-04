@@ -57,6 +57,29 @@ namespace DAL
 
             return Resultado;
         }
+
+        public SortedList Alterar(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+
+            try
+            {
+                SqlCommand Comando = new SqlCommand("STP_USUARIO_ALTERAR");
+
+                Comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "SQ_USUARIO", false));
+                Comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "NM_USUARIO", false));
+                Comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "DS_EMAIL", false));
+                Comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "DS_SENHA", false));
+
+                Resultado = ExecutarComandoManutencao(Comando);
+            }
+            catch(Exception Erro)
+            {
+                Resultado["Tipo"] = TipoMensagem.Erro;
+                Resultado["Mensagem"] = "Erro encontrado: " + Erro.Message;
+            }
+            return Resultado;
+        }
     }
 }
 

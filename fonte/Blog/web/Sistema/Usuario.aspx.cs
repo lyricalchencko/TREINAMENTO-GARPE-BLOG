@@ -116,5 +116,64 @@ namespace web.Sistema
             }
         }
 
+        protected void BotaoAlterarUsuario_Click(object sender, EventArgs e)
+        {
+            Button BotaoAlterar = (Button)sender;
+
+            SortedList Parametros = new SortedList();
+
+            Parametros["SQ_USUARIO"] = BotaoAlterar.CommandArgument;
+
+            Detalhar(Parametros);
+        }
+
+        protected void Detalhar(SortedList Parametros)
+        {
+            AreaDados.Visible = true;
+            AreaFiltro.Visible = false;
+            AreaConsulta.Visible = false;
+
+            SortedList Resultado = new SortedList();
+
+            UsuarioBLL Usuario = new UsuarioBLL();
+            Resultado = Usuario.Consultar(Parametros);
+
+            if (Resultado["Tipo"].ToString() == "Sucesso")
+            {
+                DataTable TabelaResultado = (DataTable)Resultado["Retorno"];
+
+                NM_USUARIO.Text = (String)TabelaResultado.Rows[0]["NM_USUARIO"];
+                DS_EMAIL.Text = (String)TabelaResultado.Rows[0]["DS_EMAIL"];
+                DS_SENHA.Text = (String)TabelaResultado.Rows[0]["DS_SENHA"];
+            }
+
+        }
+
+        protected void BtnAlterar_Click(object sender, EventArgs e)
+        {
+            Button BtnAlterar = (Button)sender;
+            SortedList Parametros = new SortedList();
+
+            Parametros["SQ_USUARIO"] = BtnAlterar.CommandArgument;
+            Parametros["NM_USUAIO"] = NM_USUARIO.Text;
+            Parametros["DS_EMAIL"] = DS_EMAIL.Text;
+            Parametros["DS_SENHA"] = DS_SENHA.Text;
+
+            Alterar(Parametros);
+
+        }
+
+        protected void Alterar(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+
+            UsuarioBLL Usuario = new UsuarioBLL();
+            Resultado = Usuario.Consultar(Parametros);
+
+            if (Resultado["Tipo"].ToString() == "Sucesso")
+            {
+                Usuario.Alterar(Parametros);
+            }
+        }
     }
 }

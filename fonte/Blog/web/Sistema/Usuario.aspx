@@ -67,6 +67,16 @@
                                 <asp:BoundField DataField="SQ_USUARIO" HeaderText="Código" />
                                 <asp:BoundField DataField="NM_USUARIO" HeaderText="Nome" />
                                 <asp:BoundField DataField="DS_EMAIL" HeaderText="Email" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button Text="Alterar" 
+                                            runat="server" 
+                                            ID="BotaoAlterarUsuario"
+                                            CssClass="btn btn-outline-primary"
+                                            OnClick="BotaoAlterarUsuario_Click"
+                                            CommandArgument='<%# Eval("SQ_USUARIO") %>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -98,7 +108,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-12 text-center">
-                                    <asp:Button ID="BtnIncluir" runat="server" CssClass="btn btn-primary" Text="Incluir" OnClick="BtnIncluir_Click" />
+                                    <asp:Button ID="BtnAlterar" runat="server" CssClass="btn btn-primary" Text="Alterar" OnClick="BtnAlterar_Click" />
                                     <asp:Button ID="BtnVoltar" runat="server" CssClass="btn btn-secondary" OnClick="BtnVoltar_Click" Text="Voltar" ValidateRequestMode="Disabled" />
                                 </div>
                             </div>
