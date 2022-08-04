@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="web.biblioteca.Aparencia.Principal" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Blog</title>
+
+    <link href="/biblioteca/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="/biblioteca/estilo/site.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <style>
+        body {
+            background-color: #e4e3ea;            
+        }
+        .navbar-principal {
+            margin-bottom: 40px;
+        }
+        .navbar-rodape {
+            height: 50px;
+            margin-top: 50px;
+            background-color: #4e5154 !important;
+        }
+    </style>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <nav class="navbar-principal navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <a class="navbar-brand" href="/">Aplanex</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Sistema/Usuario.aspx">Cadastro Usuário</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <asp:ContentPlaceHolder ID="AreaPrincipal" runat="server"></asp:ContentPlaceHolder>
+
+        <nav class="navbar-rodape navbar navbar-expand-lg navbar-dark bg-dark">
+
+        </nav>
+    </form>
+
+    <script src="/biblioteca/jquery/jquery.slim.min.js"></script>
+    <script src="/biblioteca/popper/popper.min.js"></script>
+    <script src="/biblioteca/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

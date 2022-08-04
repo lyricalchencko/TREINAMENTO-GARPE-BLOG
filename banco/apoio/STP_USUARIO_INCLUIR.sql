@@ -1,0 +1,58 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+--remove a procedure para ser recriada
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE Name = 'STP_USUARIO_INCLUIR')
+    DROP PROCEDURE dbo.STP_USUARIO_INCLUIR
+GO
+
+CREATE PROCEDURE STP_USUARIO_INCLUIR
+(
+	@DS_EMAIL VARCHAR(150), 
+	@DS_SENHA VARCHAR(100),
+	@NM_USUARIO VARCHAR(100)
+)
+AS
+SET NOCOUNT ON;
+--INICIO
+
+	DECLARE @SQ_BLOG INT
+	DECLARE @SQ_USUARIO_EMAIL_DUP INT
+
+	--validar se o email e unico no banco
+	SET @SQ_USUARIO_EMAIL_DUP = (SELECT TOP 1 SQ_USUARIO FROM TB_USUARIO USU WITH(NOLOCK) WHERE USU.DS_EMAIL = @DS_EMAIL)
+
+	IF @SQ_USUARIO_EMAIL_DUP IS NOT NULL
+	BEGIN
+		SELECT 'Aviso' AS CT_TIPO, 'Email já cadastrado' AS CT_MENSAGEM
+	END
+	ELSE
+	BEGIN
+	    
+		--inclusao  do usuario
+	    INSERT INTO TB_USUARIO 
+	    (
+	        DS_EMAIL, 
+	        DS_SENHA, 
+	        NM_USUARIO
+	    )
+	    VALUES
+	    (
+	        @DS_EMAIL, 
+	        @DS_SENHA, 
+	        @NM_USUARIO
+	    )
+
+		-- retorno da procedure
+	    SELECT 'Sucesso' AS CT_TIPO, 'Registro incluido com sucesso' AS CT_MENSAGEM
+	END
+	    
+--FIM
+SET NOCOUNT OFF
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO

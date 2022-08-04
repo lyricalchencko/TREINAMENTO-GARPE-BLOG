@@ -1,0 +1,37 @@
+﻿.conteudo {
+    min-height: 72.8vh;
+}
+
+.conteudo-cadastro {
+    background-color: #FFF;
+    padding: 20px 10px 5px;
+}
+
+.cadastro-titulo {
+    margin-bottom: 1.8rem;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding-left: 1rem;
+}
+
+.formulario-filtro {
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: 1px solid #c6c4c4;
+    padding: 20px 10px 5px;
+    margin-bottom: 20px;
+}
+
+.table-consulta {
+    background-color: #FFF;
+}
+
+.thead-dark th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
