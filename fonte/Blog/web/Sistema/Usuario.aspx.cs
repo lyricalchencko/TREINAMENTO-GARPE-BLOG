@@ -142,6 +142,7 @@ namespace web.Sistema
             {
                 DataTable TabelaResultado = (DataTable)Resultado["Retorno"];
 
+                SQ_USUARIO.Value = TabelaResultado.Rows[0]["SQ_USUARIO"].ToString();
                 NM_USUARIO.Text = (String)TabelaResultado.Rows[0]["NM_USUARIO"];
                 DS_EMAIL.Text = (String)TabelaResultado.Rows[0]["DS_EMAIL"];
                 DS_SENHA.Text = (String)TabelaResultado.Rows[0]["DS_SENHA"];
@@ -151,13 +152,16 @@ namespace web.Sistema
 
         protected void BtnAlterar_Click(object sender, EventArgs e)
         {
-            Button BtnAlterar = (Button)sender;
             SortedList Parametros = new SortedList();
+            SortedList Resultado = new SortedList();
+            UsuarioBLL Usuario = new UsuarioBLL();
 
-            Parametros["SQ_USUARIO"] = BtnAlterar.CommandArgument;
-            Parametros["NM_USUAIO"] = NM_USUARIO.Text;
+            Parametros["SQ_USUARIO"] = SQ_USUARIO.Value;
+            Parametros["NM_USUARIO"] = NM_USUARIO.Text;
             Parametros["DS_EMAIL"] = DS_EMAIL.Text;
             Parametros["DS_SENHA"] = DS_SENHA.Text;
+
+            Resultado = Usuario.Alterar(Parametros);
 
             Alterar(Parametros);
 
@@ -168,11 +172,18 @@ namespace web.Sistema
             SortedList Resultado = new SortedList();
 
             UsuarioBLL Usuario = new UsuarioBLL();
-            Resultado = Usuario.Consultar(Parametros);
+
+            Resultado = Usuario.Alterar(Parametros);
 
             if (Resultado["Tipo"].ToString() == "Sucesso")
             {
-                Usuario.Alterar(Parametros);
+                MensagemErro.Text = Resultado["Mensagem"].ToString();
+                AreaMensagem.Visible = true;
+            }
+            else
+            {
+                MensagemErro.Text = Resultado["Mensagem"].ToString();
+                AreaMensagem.Visible = true;
             }
         }
     }

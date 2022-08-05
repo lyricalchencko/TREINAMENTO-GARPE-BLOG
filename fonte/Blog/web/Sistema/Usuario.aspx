@@ -87,6 +87,7 @@
                     <div class="col col-md-10 col-lg-6">
 
                         <div>
+                            <asp:HiddenField ID="SQ_USUARIO" runat="server"></asp:HiddenField>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Nome</label>
                                 <div class="col-sm-10">
@@ -108,7 +109,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-12 text-center">
-                                    <asp:Button ID="BtnAlterar" runat="server" CssClass="btn btn-primary" Text="Alterar" OnClick="BtnAlterar_Click" />
+                                    <asp:Button ID="BtnAlterar" runat="server" CssClass="btn btn-primary" Text="Alterar" OnClick="BtnAlterar_Click" CommandArgument='<%# Eval("SQ_USUARIO_CAMPO") %>'/>
                                     <asp:Button ID="BtnVoltar" runat="server" CssClass="btn btn-secondary" OnClick="BtnVoltar_Click" Text="Voltar" ValidateRequestMode="Disabled" />
                                 </div>
                             </div>

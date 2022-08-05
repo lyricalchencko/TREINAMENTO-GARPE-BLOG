@@ -114,6 +114,15 @@ namespace web.Sistema
         protected global::System.Web.UI.WebControls.Panel AreaDados;
 
         /// <summary>
+        /// SQ_USUARIO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SQ_USUARIO;
+
+        /// <summary>
         /// NM_USUARIO control.
         /// </summary>
         /// <remarks>
