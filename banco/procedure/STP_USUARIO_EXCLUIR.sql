@@ -29,7 +29,7 @@ SET NOCOUNT ON;
 			DELETE FROM TB_USUARIO WHERE SQ_USUARIO = @SQ_USUARIO
 
 			-- retorno da procedure
-			SELECT 'Sucesso' AS CT_TIPO, 'Registro incluido com sucesso' AS CT_MENSAGEM
+			SELECT 'Sucesso' AS CT_TIPO, 'Registro excluido com sucesso' AS CT_MENSAGEM
 	END
 
 --FIM

@@ -23,8 +23,8 @@ namespace web.Sistema
             if (AreaMensagem.Visible)
             {
                 AreaMensagem.Visible = false;
-                AreaDetalhamentoUsuario.Visible = false;
             }
+            AreaDetalhamentoUsuario.Visible = false;
         }
 
         protected void Filtrar()
@@ -185,7 +185,14 @@ namespace web.Sistema
 
         protected void BtnExcluir_Click(object sender, EventArgs e)
         {
+            SortedList Resultado = new SortedList();
+            SortedList Parametros = new SortedList();
+            Parametros["SQ_USUARIO"] = SQ_USUARIO_EXCLUIR.Value;
+            UsuarioBLL Usuario = new UsuarioBLL();
 
+            Resultado = Usuario.Excluir(Parametros);
+            
+            Filtrar();
         }
 
         protected void BtnExcluirUsuario_Click(object sender, EventArgs e)
@@ -197,15 +204,36 @@ namespace web.Sistema
             AreaDetalhamentoUsuario.Visible = true;
 
             SortedList Parametros = new SortedList();
-            SortedList Resultado = new SortedList();
             SortedList DetalhesUsuario = new SortedList();
 
             Parametros["SQ_USUARIO"] = BtnExcluir.CommandArgument;
+            SQ_USUARIO_EXCLUIR.Value = (string)Parametros["SQ_USUARIO"];
 
             UsuarioBLL Usuario = new UsuarioBLL();
             DetalhesUsuario = Usuario.Consultar(Parametros);
 
-            Resultado = Usuario.Excluir(Parametros);
+            if (DetalhesUsuario["Tipo"].ToString() == "Sucesso")
+            {
+                DataTable TabelaResultado = (DataTable)DetalhesUsuario["Retorno"];
+
+                NOMEUSUARIOEXCLUIR.Text = (String)TabelaResultado.Rows[0]["NM_USUARIO"];
+                EMAILUSUARIOEXCLUIR.Text = (String)TabelaResultado.Rows[0]["DS_EMAIL"];
+            }
+        }
+
+        protected void BtnIncluirPost_Click(object sender, EventArgs e)
+        {
+            SortedList Parametros = new SortedList();
+            SortedList Resultado = new SortedList();
+
+            UsuarioBLL Usuario = new UsuarioBLL();
+
+            Parametros["SQ_USUARIO"] = SQ_USUARIO_PUBLICACAO.Text;
+            Parametros["NM_PUBLICACAO"] = NM_PUBLICACAO.Text;
+            Parametros["DS_CONTEUDO"] = DS_CONTEUDO.Text;
+
+            Resultado = Usuario.IncluirPublicacao(Parametros);
+            
         }
     }
 }

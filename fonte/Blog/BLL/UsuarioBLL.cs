@@ -208,5 +208,51 @@ namespace BLL
             return Resultado;
 
         }
+
+        public SortedList IncluirPublicacao(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+            string mensagem = "";
+
+            try
+            {
+                string SQ_USUARIO = UtilParametro.CapturarCampoString(Parametros, "SQ_USUSARIO");
+
+                //valida SQ_USUARIO
+                if(string.IsNullOrEmpty(SQ_USUARIO))
+                {
+                    mensagem = "O campo \"SQ_USUARIO\" deve ser preenchido!";
+                }
+
+                //valida NM_PUBLICACAO
+                if(string.IsNullOrEmpty(SQ_USUARIO))
+                {
+                    mensagem = "O título da publicação deve ser preenchido!";
+                }
+                else if(SQ_USUARIO.Length > 200)
+                {
+                    mensagem = "O o título não pode passar de 200 caracteres.";
+                }
+
+                //Se tudo estiver validado, faz requisição à DAL
+                if (string.IsNullOrEmpty(mensagem))
+                {
+                    UsuarioDAL Usuario = new UsuarioDAL();
+                    Usuario.IncluirPublicacao(Parametros);
+                }
+                else
+                {
+                    Resultado["Tipo"] = "Aviso";
+                    Resultado["Mensagem"] = mensagem;
+                }
+            }
+            catch (Exception erro)
+            {
+                Resultado["Tipo"] = "Erro";
+                Resultado["Mensagem"] = "Erro em UsuarioBLL: " + erro;
+            }
+
+            return Resultado;
+        }
     }
 }

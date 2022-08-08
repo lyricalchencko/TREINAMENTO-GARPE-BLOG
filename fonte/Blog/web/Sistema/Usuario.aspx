@@ -129,7 +129,6 @@
                 <asp:Panel ID="AreaDetalhamentoUsuario" runat="server" CssClass="row justify-content-center">
                     <form>
                         <fieldset disabled>
-                            <%--<asp:HiddenField ID="SQ_USUARIO_EXCLUIR" />--%>
                             <div class="form-group">
                                 <label for="disabledTextInput">Nome:</label>
                                 <asp:TextBox ID="NOMEUSUARIOEXCLUIR" runat="server" CssClass="form-control"></asp:TextBox>
@@ -143,7 +142,9 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <asp:HiddenField ID="SQ_USUARIO_EXCLUIR" runat="server"/>
                         <div class="form-group row">
+                            <div class="col">
                                    <asp:Button ID="Button1" 
                                        runat="server" 
                                        CssClass="btn btn-danger col-sm-2" 
@@ -155,8 +156,45 @@
                                        OnClick="BtnVoltar_Click" 
                                        Text="Voltar" 
                                        ValidateRequestMode="Disabled" />
+                            </div>
                         </div>
                     </form>
+                </asp:Panel>
+
+                <%--Área incluir Publicação--%>
+                <asp:Panel ID="AreaIncluirPublicacao" runat="server" CssClass="row justify-content-center">
+                    <div class="col col-md-10 col-lg-6 ">
+                        <div class="formulario-filtro">
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">SQ DO USUÁRIO:</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox runat="server" ID="SQ_USUARIO_PUBLICACAO" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">TÍTULO: </label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox runat="server" ID="NM_PUBLICACAO" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Conteúdo: </label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox runat="server" ID="DS_CONTEUDO" CssClass="form-control" Rows="6" TextMode="MultiLine"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col text-center">
+                                    <asp:Button runat="server" ID="BtnIncluirPost" CssClass="btn btn-primary" Text="Incluir" OnClick="BtnIncluirPost_Click" />
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
                 </asp:Panel>
 
             </div>
@@ -165,31 +203,3 @@
     </div>
 
 </asp:Content>
-    
-    
-    <%--<asp:label
-        id="LABEL_AVISO"
-        runat="server"/>
-    <form>
-      <div class="form-group row d-flex justify-content-center">
-        <label for="exampleInputEmail1">Nome</label>
-        <asp:TextBox ID="NM_USUARIO_FILTRO" runat="server"/>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">E-mail</label>
-        <asp:TextBox ID="DS_EMAIL_FILTRO" runat="server"/>
-      </div>
-      <asp:Button ID="Button1" 
-          runat="server" 
-          text="Pesquisar"
-          OnClick="Button1_Click"/>
-    </form>
-    <br />
-
-    <asp:GridView ID="GdvConsulta" AutoGenerateColumns="false" runat="server">
-        <Columns>
-            <asp:BoundField DataField="SQ_USUARIO" HeaderText="Código" />
-            <asp:BoundField DataField="NM_USUARIO" HeaderText="Nome" />
-            <asp:BoundField DataField="DS_EMAIL" HeaderText="Email" />
-        </Columns>
-    </asp:GridView>--%>

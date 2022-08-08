@@ -87,7 +87,7 @@ namespace DAL
 
             try
             {
-                SqlCommand comando = new SqlCommand();
+                SqlCommand comando = new SqlCommand("STP_USUARIO_EXCLUIR");
 
                 comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "SQ_USUARIO", false));
                 Resultado = ExecutarComandoManutencao(comando);
@@ -98,6 +98,28 @@ namespace DAL
                 Resultado["Mensagem"] = "Erro em UsuarioDAL:Exluir(): " + erro;
             }
 
+            return Resultado;
+        }
+
+        public SortedList IncluirPublicacao(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand("STP_PUBLICACAO_INCLUIR");
+
+                comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "SQ_USUARIO", false));
+                comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "NM_PUBLICACAO", false));
+                comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "DS_CONTEUDO", false));
+
+                Resultado = ExecutarComandoManutencao(comando);
+            }
+            catch (Exception erro)
+            {
+                Resultado["Tipo"] = TipoMensagem.Erro;
+                Resultado["Mensagem"] = erro.Message;
+            }
             return Resultado;
         }
     }

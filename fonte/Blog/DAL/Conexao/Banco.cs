@@ -13,7 +13,7 @@ namespace DAL.Conexao
     public class Banco
     {
         //casa DESKTOP-CFMHUD3 garpe DESKTOP-8T2BFT2
-        private static string stringConexao = @"Data Source=DESKTOP-CFMHUD3;Initial Catalog=treinamento;Integrated Security=SSPI;"; // User ID=sa;Password=shell";
+        private static string stringConexao = @"Data Source=DESKTOP-8T2BFT2;Initial Catalog=treinamento;Integrated Security=SSPI;"; // User ID=sa;Password=shell";
 
         private SqlConnection conexao;
 
