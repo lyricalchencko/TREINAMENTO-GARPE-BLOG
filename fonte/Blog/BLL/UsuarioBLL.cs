@@ -197,5 +197,16 @@ namespace BLL
 
             return Resultado;
         }
+
+        public SortedList Excluir(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+            UsuarioDAL Usuario = new UsuarioDAL();
+
+            Resultado = Usuario.Excluir(Parametros);
+
+            return Resultado;
+
+        }
     }
 }

@@ -54,7 +54,7 @@
                                     <asp:Button runat="server" ID="BtnNovo" CssClass="btn btn-primary" Text="Novo" OnClick="BtnNovo_Click" />
                                 </div>
                             </div>
-
+                           
                         </div>
                     </div>
                 </asp:Panel>
@@ -74,6 +74,12 @@
                                             ID="BotaoAlterarUsuario"
                                             CssClass="btn btn-outline-primary"
                                             OnClick="BotaoAlterarUsuario_Click"
+                                            CommandArgument='<%# Eval("SQ_USUARIO") %>' />
+                                        <asp:Button Text="Excluir" 
+                                            runat="server" 
+                                            ID="BtnExcluirUsuario"
+                                            CssClass="btn btn-outline-danger"
+                                            OnClick="BtnExcluirUsuario_Click"
                                             CommandArgument='<%# Eval("SQ_USUARIO") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -111,11 +117,46 @@
                                 <div class="col-sm-12 text-center">
                                     <asp:Button ID="BtnAlterar" runat="server" CssClass="btn btn-primary" Text="Alterar" OnClick="BtnAlterar_Click" CommandArgument='<%# Eval("SQ_USUARIO_CAMPO") %>'/>
                                     <asp:Button ID="BtnVoltar" runat="server" CssClass="btn btn-secondary" OnClick="BtnVoltar_Click" Text="Voltar" ValidateRequestMode="Disabled" />
+                                    <asp:Button ID="BtnIncluir" runat="server" CssClass="btn btn-secondary" OnClick="BtnIncluir_Click" Text="Incluir" ValidateRequestMode="Disabled" />
                                 </div>
                             </div>
                         </div>
 
                     </div>
+                </asp:Panel>
+
+                <%-- Detalhamento Usuário --%>
+                <asp:Panel ID="AreaDetalhamentoUsuario" runat="server" CssClass="row justify-content-center">
+                    <form>
+                        <fieldset disabled>
+                            <%--<asp:HiddenField ID="SQ_USUARIO_EXCLUIR" />--%>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Nome:</label>
+                                <asp:TextBox ID="NOMEUSUARIOEXCLUIR" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">E-mail:</label>
+                                <asp:TextBox ID="EMAILUSUARIOEXCLUIR" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                               <div class="col-sm-12 text-center">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group row">
+                                   <asp:Button ID="Button1" 
+                                       runat="server" 
+                                       CssClass="btn btn-danger col-sm-2" 
+                                       Text="Excluir" 
+                                       OnClick="BtnExcluir_Click"/>
+                                   <asp:Button ID="Button2" 
+                                       runat="server" 
+                                       CssClass="btn btn-secondary col-sm-2" 
+                                       OnClick="BtnVoltar_Click" 
+                                       Text="Voltar" 
+                                       ValidateRequestMode="Disabled" />
+                        </div>
+                    </form>
                 </asp:Panel>
 
             </div>

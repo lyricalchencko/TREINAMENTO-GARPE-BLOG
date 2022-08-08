@@ -23,6 +23,7 @@ namespace web.Sistema
             if (AreaMensagem.Visible)
             {
                 AreaMensagem.Visible = false;
+                AreaDetalhamentoUsuario.Visible = false;
             }
         }
 
@@ -68,14 +69,19 @@ namespace web.Sistema
 
         protected void BtnNovo_Click(object sender, EventArgs e)
         {
+            Button BotaoIncluir = (Button)sender;
+            BotaoIncluir.Text = "Incluir";
+
             AreaFiltro.Visible = false;
             AreaConsulta.Visible = false;
             AreaDados.Visible = true;
 
+            BtnAlterar.Visible = false;
+            BtnIncluir.Visible = true;
+
             NM_USUARIO.Text = "";
             DS_EMAIL.Text = "";
             DS_SENHA.Text = "";
-
         }
 
         protected void BtnVoltar_Click(object sender, EventArgs e)
@@ -85,21 +91,20 @@ namespace web.Sistema
 
         protected void BtnIncluir_Click(object sender, EventArgs e)
         {
-            SortedList Parametros = new SortedList();
-            SortedList Resultado = new SortedList();
-
-            Parametros["NM_USUARIO"] = NM_USUARIO.Text;
-            Parametros["DS_EMAIL"] = DS_EMAIL.Text;
-            Parametros["DS_SENHA"] = DS_SENHA.Text;
+            var Parametros = new SortedList
+            {
+                ["NM_USUARIO"] = NM_USUARIO.Text,
+                ["DS_EMAIL"] = DS_EMAIL.Text,
+                ["DS_SENHA"] = DS_SENHA.Text
+            };
 
             //Faz a consulta no banco
             UsuarioBLL Usuario = new UsuarioBLL();
-            Resultado = Usuario.Incluir(Parametros);
+            SortedList Resultado = Usuario.Incluir(Parametros);
 
             //Processa o resultado
 
             string Tipo = Resultado["Tipo"].ToString();
-
 
             if (Tipo == "Sucesso")
             {
@@ -113,12 +118,14 @@ namespace web.Sistema
             else
             {
                 MensagemErro.Text = Resultado["Mensagem"].ToString();
+                AreaMensagem.Visible = true;
             }
         }
-
         protected void BotaoAlterarUsuario_Click(object sender, EventArgs e)
         {
             Button BotaoAlterar = (Button)sender;
+            BtnAlterar.Visible = true;
+            BtnIncluir.Visible = false;
 
             SortedList Parametros = new SortedList();
 
@@ -163,18 +170,6 @@ namespace web.Sistema
 
             Resultado = Usuario.Alterar(Parametros);
 
-            Alterar(Parametros);
-
-        }
-
-        protected void Alterar(SortedList Parametros)
-        {
-            SortedList Resultado = new SortedList();
-
-            UsuarioBLL Usuario = new UsuarioBLL();
-
-            Resultado = Usuario.Alterar(Parametros);
-
             if (Resultado["Tipo"].ToString() == "Sucesso")
             {
                 MensagemErro.Text = Resultado["Mensagem"].ToString();
@@ -185,6 +180,32 @@ namespace web.Sistema
                 MensagemErro.Text = Resultado["Mensagem"].ToString();
                 AreaMensagem.Visible = true;
             }
+
+        }
+
+        protected void BtnExcluir_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnExcluirUsuario_Click(object sender, EventArgs e)
+        {
+            Button BtnExcluir = (Button)sender;
+
+            AreaConsulta.Visible = false;
+            AreaFiltro.Visible = false;
+            AreaDetalhamentoUsuario.Visible = true;
+
+            SortedList Parametros = new SortedList();
+            SortedList Resultado = new SortedList();
+            SortedList DetalhesUsuario = new SortedList();
+
+            Parametros["SQ_USUARIO"] = BtnExcluir.CommandArgument;
+
+            UsuarioBLL Usuario = new UsuarioBLL();
+            DetalhesUsuario = Usuario.Consultar(Parametros);
+
+            Resultado = Usuario.Excluir(Parametros);
         }
     }
 }

@@ -80,6 +80,26 @@ namespace DAL
             }
             return Resultado;
         }
+
+        public SortedList Excluir(SortedList Parametros)
+        {
+            SortedList Resultado = new SortedList();
+
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+
+                comando.Parameters.Add(UtilParametro.CapturarParametroSql(Parametros, "SQ_USUARIO", false));
+                Resultado = ExecutarComandoManutencao(comando);
+            }
+            catch (Exception erro)
+            {
+                Resultado["Tipo"] = "Erro";
+                Resultado["Mensagem"] = "Erro em UsuarioDAL:Exluir(): " + erro;
+            }
+
+            return Resultado;
+        }
     }
 }
 
